@@ -1,0 +1,12 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background-color: #666;
+}
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}

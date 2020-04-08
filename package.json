@@ -1,0 +1,16 @@
+{
+  "name": "arduino-leds-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"cd packages/server && yarn start\" \"cd packages/client && yarn start\""
+  },
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
