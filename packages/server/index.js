@@ -9,18 +9,18 @@ const PORT = 3020;
 board.on("ready", () => {
   const app = express();
   const leds = {
-    green: new Led(11),
-    yellow: new Led(12),
-    red: new Led(13),
+    success: new Led(11),
+    warning: new Led(12),
+    danger: new Led(13),
   };
 
-  const ledToggle = (color = null, status = null) => {
-    const allowedStatuses = ["on", "off"];
+  const ledToggle = (color = null, status = null, value) => {
+    const allowedStatuses = ["on", "off", "blink", "stop"];
 
     if (!color || !status || !allowedStatuses.includes(status))
       return { code: 405, message: "Not Allowed" };
 
-    leds[color][status]();
+    leds[color][status](value);
 
     return { color, status, code: 200, message: "Success" };
   };
@@ -31,11 +31,11 @@ board.on("ready", () => {
     res.send("Server running");
   });
 
-  app.get("/:color/:status/", (req, res) => {
-    const { color, status } = req.params;
+  app.get("/:color/:status/:value?", (req, res) => {
+    const { color, status, value } = req.params;
     console.log(`${color} => ${status}`);
 
-    const response = ledToggle(color, status);
+    const response = ledToggle(color, status, value);
 
     res.json(response);
   });
@@ -47,8 +47,8 @@ board.on("ready", () => {
 });
 
 // Exit.
-// board.on("exit", () => {
-//   ledToggle("red", "off");
-//   ledToggle("yellow", "off");
-//   ledToggle("green", "off");
-// });
+board.on("exit", () => {
+  new Led(11).stop().off();
+  new Led(12).stop().off();
+  new Led(13).stop().off();
+});
