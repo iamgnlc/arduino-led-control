@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./App";
-import "./index.css";
+import LedControl from "./LedControl";
+import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LedControl />
   </React.StrictMode>,
   document.getElementById("root")
 );
