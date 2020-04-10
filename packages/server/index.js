@@ -48,6 +48,7 @@ board.on("ready", () => {
 
 // Exit.
 board.on("exit", () => {
+  console.log("Shutting down leds...");
   new Led(11).stop().off();
   new Led(12).stop().off();
   new Led(13).stop().off();
