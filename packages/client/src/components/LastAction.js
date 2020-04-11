@@ -5,7 +5,7 @@ const LastAction = (props) => {
   const { color, status } = props;
 
   return (
-    <Table bordered size="sm" className="my-4">
+    <Table className="my-4" bordered>
       <thead>
         <tr>
           <th colSpan="2">Last Action</th>

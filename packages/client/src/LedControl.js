@@ -113,7 +113,7 @@ const LedControl = () => {
               <h4 className="m-0 text-center">Arduino LED Control</h4>
             </CardHeader>
             <CardBody>
-              <div className="d-flex justify-content-around flex-column flex-lg-row">
+              <Row>
                 <Suspense fallback={<Loading />}>
                   <ToggleButtons
                     color="danger"
@@ -134,7 +134,7 @@ const LedControl = () => {
                     toggleLed={toggleLed}
                   />
                 </Suspense>
-              </div>
+              </Row>
 
               <FormGroup className="d-flex justify-content-center align-items-center flex-column">
                 <Label>Blink interval</Label>

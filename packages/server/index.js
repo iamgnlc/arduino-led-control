@@ -16,15 +16,23 @@ board.on("ready", () => {
     danger: new Led(13),
   };
 
+  const allowedStatuses = ["on", "off", "blink", "stop"];
+
+  const isRequestValid = (color, status) => {
+    return (
+      color &&
+      status &&
+      allowedStatuses.includes(status) &&
+      Object.keys(leds).includes(color)
+    );
+  };
+
   const ledToggle = (color = null, status = null, value) => {
-    const allowedStatuses = ["on", "off", "blink", "stop"];
+    if (isRequestValid(color, status)) {
+      leds[color][status](value);
 
-    if (!color || !status || !allowedStatuses.includes(status))
-      return { code: 405, message: "Not Allowed" };
-
-    leds[color][status](value);
-
-    return { color, status, code: 200, message: "Success" };
+      return { color, status, code: 200, message: "Success" };
+    } else return { code: 405, message: "Not Allowed" };
   };
 
   app.use(cors());
