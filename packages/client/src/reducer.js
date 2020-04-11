@@ -1,6 +1,6 @@
 import { TOGGLE_LED, SET_BLINK } from "./actions.js";
 
-const reducer = (state, action) => {
+export default (state, action) => {
   switch (action.type) {
     case TOGGLE_LED:
       return {
@@ -17,5 +17,3 @@ const reducer = (state, action) => {
       return false;
   }
 };
-
-export default reducer;

@@ -13,6 +13,7 @@ import LastAction from "./components/LastAction";
 import Loading from "./components/Loading";
 
 import { TOGGLE_LED, SET_BLINK } from "./actions.js";
+import reducer from "./reducer.js";
 
 const ToggleButtons = React.lazy(() => import("./components/ToggleButtons"));
 const BlinkInterval = React.lazy(() => import("./components/BlinkInterval"));
@@ -24,24 +25,6 @@ const initialState = {
   apiResponse: null,
   blinkInterval: 250,
 };
-
-function reducer(state, action) {
-  switch (action.type) {
-    case TOGGLE_LED:
-      return {
-        ...state,
-        [action.color]: action.status,
-        apiResponse: action.apiResponse,
-      };
-    case SET_BLINK:
-      return {
-        ...state,
-        blinkInterval: action.value,
-      };
-    default:
-      return false;
-  }
-}
 
 const buildUrl = (color, status, value) => {
   if (!process.env.REACT_APP_SERVER_URL || !color || !status) return false;
