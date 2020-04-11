@@ -1,11 +1,5 @@
 import React, { Suspense, useReducer, useEffect, useCallback } from "react";
 import {
-  FormGroup,
-  Label,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Card,
   CardHeader,
   CardFooter,
@@ -21,6 +15,7 @@ import Loading from "./components/Loading";
 import { TOGGLE_LED, SET_BLINK } from "./actions.js";
 
 const ToggleButtons = React.lazy(() => import("./components/ToggleButtons"));
+const BlinkInterval = React.lazy(() => import("./components/BlinkInterval"));
 
 const initialState = {
   danger: "off",
@@ -114,7 +109,13 @@ const LedControl = () => {
             </CardHeader>
             <CardBody>
               <Row>
-                <Suspense fallback={<Loading />}>
+                <Suspense
+                  fallback={
+                    <Col>
+                      <Loading />
+                    </Col>
+                  }
+                >
                   <ToggleButtons
                     color="danger"
                     status={state["danger"]}
@@ -133,24 +134,12 @@ const LedControl = () => {
                     blinkInterval={state.blinkInterval}
                     toggleLed={toggleLed}
                   />
+                  <BlinkInterval
+                    blinkInterval={state.blinkInterval}
+                    setBlink={setBlink}
+                  />
                 </Suspense>
               </Row>
-
-              <FormGroup className="d-flex justify-content-center align-items-center flex-column">
-                <Label>Blink interval</Label>
-                <InputGroup className="w-50">
-                  <Input
-                    className="w-25 text-center"
-                    value={state.blinkInterval}
-                    type="number"
-                    min={100}
-                    onChange={(e) => setBlink(e.target.value)}
-                  />
-                  <InputGroupAddon addonType="append">
-                    <InputGroupText>ms</InputGroupText>
-                  </InputGroupAddon>
-                </InputGroup>
-              </FormGroup>
 
               <LastAction
                 color={state?.apiResponse?.color}

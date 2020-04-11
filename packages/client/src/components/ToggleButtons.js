@@ -5,7 +5,7 @@ const ToggleButtons = (props) => {
   const { color, status, blinkInterval, toggleLed } = props;
 
   return (
-    <Col>
+    <Col xs={12} lg={4}>
       <ButtonGroup className="my-2 w-100" size="lg">
         <Button
           color={color}
