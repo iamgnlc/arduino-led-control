@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Board, Led } = require("johnny-five");
 
 const board = new Board();
-const PORT = 3020;
+const ADDRESS = process.env.ADDRESS;
+const PORT = process.env.PORT;
 
 // Ready.
 board.on("ready", () => {
@@ -40,9 +42,9 @@ board.on("ready", () => {
     res.json(response);
   });
 
-  app.listen(PORT, () => {
+  app.listen(PORT, ADDRESS, () => {
     // Actually turn the server on
-    console.log(`Server running at http://localhost:${PORT}/`);
+    console.log(`Server running at http://${ADDRESS}:${PORT}/`);
   });
 });
 
