@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Col,
   FormGroup,
@@ -31,6 +32,11 @@ const BlinkInterval = (props) => {
       </FormGroup>
     </Col>
   );
+};
+
+BlinkInterval.propTypes = {
+  blinkInterval: PropTypes.string.isRequired,
+  setBlink: PropTypes.func.isRequired,
 };
 
 export default React.memo(BlinkInterval);

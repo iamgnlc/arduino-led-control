@@ -1,5 +1,6 @@
 import React from "react";
 import { ButtonGroup, Button, Col } from "reactstrap";
+import PropTypes from "prop-types";
 
 const ToggleButtons = (props) => {
   const { color, status, blinkInterval, toggleLed } = props;
@@ -34,6 +35,13 @@ const ToggleButtons = (props) => {
       </ButtonGroup>
     </Col>
   );
+};
+
+ToggleButtons.propTypes = {
+  color: PropTypes.string,
+  status: PropTypes.string,
+  blinkInterval: PropTypes.string.isRequired,
+  toggleLed: PropTypes.func.isRequired,
 };
 
 export default React.memo(ToggleButtons);

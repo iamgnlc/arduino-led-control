@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
+import PropTypes from "prop-types";
 
 const LastAction = (props) => {
   const { color, status } = props;
@@ -27,6 +28,11 @@ const LastAction = (props) => {
       </tbody>
     </Table>
   );
+};
+
+LastAction.propTypes = {
+  color: PropTypes.string,
+  status: PropTypes.string,
 };
 
 export default React.memo(LastAction);

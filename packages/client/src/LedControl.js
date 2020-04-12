@@ -23,7 +23,7 @@ const initialState = {
   warning: "off",
   success: "off",
   apiResponse: null,
-  blinkInterval: 250,
+  blinkInterval: "250",
 };
 
 const buildUrl = (color, status, value) => {
