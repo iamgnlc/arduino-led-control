@@ -12,7 +12,7 @@ import { GiLed } from "react-icons/gi";
 import LastAction from "./components/LastAction";
 import Loading from "./components/Loading";
 
-import { TOGGLE_LED, SET_BLINK } from "./actions.js";
+import { TOGGLE_LED, SET_BLINK, SET_ERROR } from "./actions.js";
 import reducer from "./reducer.js";
 
 const ToggleButtons = React.lazy(() => import("./components/ToggleButtons"));
@@ -63,6 +63,14 @@ const LedControl = () => {
         })
         .catch((error) => {
           console.error("Error:", error);
+          const state = {
+            type: SET_ERROR,
+            apiResponse: {
+              code: 503,
+              message: "Service not available",
+            },
+          };
+          dispatch(state);
         });
     });
   };
@@ -127,6 +135,7 @@ const LedControl = () => {
               <LastAction
                 color={state?.apiResponse?.color}
                 status={state?.apiResponse?.status}
+                message={state?.apiResponse?.message}
               />
             </CardBody>
             <CardFooter>

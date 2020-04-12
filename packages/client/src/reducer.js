@@ -1,4 +1,4 @@
-import { TOGGLE_LED, SET_BLINK } from "./actions.js";
+import { TOGGLE_LED, SET_BLINK, SET_ERROR } from "./actions.js";
 
 export default (state, action) => {
   switch (action.type) {
@@ -12,6 +12,11 @@ export default (state, action) => {
       return {
         ...state,
         blinkInterval: action.value,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        apiResponse: action.apiResponse,
       };
     default:
       return false;
