@@ -9,21 +9,23 @@ const LastAction = (props) => {
     <Table className="my-4" bordered>
       <thead>
         <tr>
-          <th colSpan="2">Last Action</th>
+          <th colSpan="2" className="text-muted">
+            Last Action
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row" className="text-muted">
-            Color
-          </th>
-          <td>{color || "-"}</td>
+          <th scope="row">Color</th>
+          <td>
+            <code>{color || "-"}</code>
+          </td>
         </tr>
         <tr>
-          <th scope="row" className="text-muted">
-            Status
-          </th>
-          <td>{status || "-"}</td>
+          <th scope="row">Status</th>
+          <td>
+            <code>{status || "-"}</code>
+          </td>
         </tr>
       </tbody>
     </Table>
