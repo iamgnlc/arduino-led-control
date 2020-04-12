@@ -7,14 +7,12 @@ const board = new Board();
 const ADDRESS = process.env.ADDRESS;
 const PORT = process.env.PORT;
 
+const Leds = require("./Leds");
+
 // Ready.
 board.on("ready", () => {
   const app = express();
-  const leds = {
-    success: new Led(11),
-    warning: new Led(12),
-    danger: new Led(13),
-  };
+  const leds = new Leds();
 
   const allowedStatuses = ["on", "off", "blink", "stop"];
 
@@ -23,13 +21,13 @@ board.on("ready", () => {
       color &&
       status &&
       allowedStatuses.includes(status) &&
-      Object.keys(leds).includes(color)
+      Object.keys(leds.colors).includes(color)
     );
   };
 
   const ledToggle = (color = null, status = null, value) => {
     if (isRequestValid(color, status)) {
-      leds[color][status](value);
+      leds.colors[color][status](value);
 
       return { color, status, code: 200, message: "Success" };
     } else return { code: 405, message: "Not Allowed" };
@@ -58,8 +56,7 @@ board.on("ready", () => {
 
 // Exit.
 board.on("exit", () => {
-  console.log("Shutting down leds...");
-  new Led(11).stop().off();
-  new Led(12).stop().off();
-  new Led(13).stop().off();
+  console.log("Shutting down leds.colors...");
+  const leds = new Leds();
+  leds.allOff();
 });
